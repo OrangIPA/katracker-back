@@ -6,6 +6,8 @@ import (
 )
 
 func route(app *fiber.App) {
+	app.Post("/login", handlers.Login)
+
 	app.Post("/person", handlers.NewUser)
 	app.Get("/person", handlers.AllUser)
 	app.Get("/person/:id", handlers.GetUser)

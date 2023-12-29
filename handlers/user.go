@@ -4,7 +4,6 @@ import (
 	"crypto/sha256"
 	"database/sql"
 	"encoding/hex"
-	"log"
 	"strconv"
 
 	"github.com/OrangIPA/katracker-back/db"
@@ -100,7 +99,6 @@ func UpdateUser(c *fiber.Ctx) error {
 	}
 
 	digest := sha256.Sum256([]byte(reqBody.Password))
-	log.Println(hex.EncodeToString(digest[:]))
 
 	_, err = db.Conn.Exec("UPDATE person SET username=$1, pass=$2 WHERE id=$3", reqBody.Username, hex.EncodeToString(digest[:]), id)
 	if err != nil {
